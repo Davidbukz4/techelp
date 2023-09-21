@@ -6,7 +6,62 @@
     <title>Techelp</title>
     <!-- <link rel="stylesheet" href="{% static 'css/base.css' %}"> -->
     <script src="{% static 'js/scripts.js' %}"></script>
-    
+    <style>
+        body {
+    background: #f0f0f0;
+}
+header {
+display: flex;
+align-items: center;
+background-color: rgb(160, 75, 197);
+padding: 10px;
+position: fixed;
+top: 0;
+width: 100%;
+z-index: 1;
+}
+
+header h1 {
+margin: 0;
+flex: 0 0 auto;
+}
+
+nav ul {
+list-style-type: none;
+padding: 0;
+display: flex;
+margin-left: auto;
+}
+
+nav li {
+margin-right: 20px;
+}
+
+nav a {
+text-decoration: none;
+color: rgb(11, 10, 10);
+transition: color 0.3s;
+}
+
+nav a:hover {
+color: rgb(177, 23, 23);
+}
+
+header div {
+margin-top: 10px;
+margin-right: 10px;
+}
+
+header div span {
+font-weight: bold;
+}
+
+main {
+margin-top: 70px;
+background-color: #fff;
+padding: 20px;
+}
+    </style>
 </head>
 <body>
     <header>
@@ -19,11 +74,12 @@
                 <li><a href="/signup">Sign Up</a></li>
             </ul>
         </nav>
-        <div>
-            <p>Hi <span></span></p>
-            <p><span></span> Ticket(s)</p>
-        </div>
+        
     </header>
+    <div>
+        <p>Hi <span></span></p>
+        <p><span></span> Ticket(s)</p>
+    </div>
     <main>
         <!-- {% block content %}
         {% endblock %} -->
