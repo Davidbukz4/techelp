@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Login</title>
+    <link rel="stylesheet" href="../static/css/signin.css">
+  </head>
+  <body>
+   <!-- <p>Flashed message</p> -->
+    <form id="loginForm" method="post" action="/login">
+      <h2>Login</h2>
+      {{ form.hidden_tag() }}
+      {{ form.username(class="form.control", id="username", placeholder="Username") }}
+      {{ form.password(class="form-control", id="password", placeholder="Password") }}
+      {{ form.submit(class="btn btn-primary") }}
+      <p>Don't have an account? <a href="/signup">Sign up</a></p>
+    </form>
+  </body>
+</html>

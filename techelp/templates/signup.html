@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Sign Up</title>
+    <!-- <link rel="stylesheet" href="{% static 'css/home.css' %}"> -->
+    <link rel="stylesheet" href="../static/css/signup.css">
+  </head>
+  <body>
+    <!-- <p>Flashed messages</p> -->
+    <div class="container">
+      <form id="signupForm" method="POST" action="/signup">
+        <h2>Registration</h2>
+        {{ form.hidden_tag() }}
+        {{ form.username(class="form-control", id="username", placeholder="Username") }}<br>
+        {{ form.password(class="form-control", id="password", placeholder="Password") }}<br>
+        {{ form.email(class="form-control", id="email", placeholder="Email") }}<br>
+        {{ form.submit() }}
+        <a href="/login">Login</a>
+      </form>
+    </div>
+  </body>
+</html>

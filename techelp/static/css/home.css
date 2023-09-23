@@ -1,0 +1,36 @@
+body {
+    background-image: linear-gradient(
+        rgba(55, 6, 85, 0.783),
+        rgba(100, 85, 109, 0.5)
+      ),
+      url("/static/images/background.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: fixed;
+  }
+  
+  div {
+    text-align: center;
+    margin-top: 100px;
+  }
+  
+  h1 {
+    font-family: cursive, sans-serif;
+    font-size: 50px;
+    margin-bottom: 100px;
+  }
+  
+  .info {
+    font-size: 20px;
+    font-family: Dekko, sans-serif;
+  }
+  
+  footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+    padding: 10px;
+  }

@@ -1,54 +1,64 @@
 body {
-    background: #f0f0f0;
+  background: #f0f0f0;
 }
 header {
-display: flex;
-align-items: center;
-background-color: rgb(160, 75, 197);
-padding: 10px;
-position: fixed;
-top: 0;
-width: 100%;
-z-index: 1;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: rgb(160, 75, 197);
+  padding: 10px;
+  /* position: fixed; */
+  top: 0;
+  width: 100%;
+  z-index: 1;
+  box-sizing: border-box;
+  right: 0;
 }
 
 header h1 {
-margin: 0;
-flex: 0 0 auto;
+  margin: 0;
 }
 
 nav ul {
-list-style-type: none;
-padding: 0;
-display: flex;
-margin-left: auto;
+  list-style-type: none;
+  padding: 0;
+  display: flex;
+  margin-right: 20px;
 }
 
 nav li {
-margin-right: 20px;
+  margin-right: 20px;
 }
 
 nav a {
-text-decoration: none;
-color: rgb(11, 10, 10);
-transition: color 0.3s;
+  text-decoration: none;
+  color: rgb(11, 10, 10);
+  transition: color 0.3s;
 }
 
 nav a:hover {
-color: rgb(177, 23, 23);
+  color: rgb(177, 23, 23);
 }
 
-header div {
-margin-top: 10px;
-margin-right: 10px;
+div {
+  margin-top: 10px;
+  top: 10px;
+  padding: 10px;
+  /* background-color: #fff; */
+  width: auto;
+  /* position: fixed; */
+  /* z-index: 1; */
+  /* display: flex; */
 }
 
-header div span {
-font-weight: bold;
+div span {
+  font-weight: bold;
 }
 
 main {
-margin-top: 70px;
-background-color: #fff;
-padding: 20px;
+  /* margin-top: 70px; */
+  background-color: #fff;
+  padding: 10px;
+  height: auto;
+  margin-top: 10px;
 }
