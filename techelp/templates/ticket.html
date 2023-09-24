@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Ticket</title>
+    <link rel="stylesheet" href="../static/css/ticket.css">
+</head>
+<body>
+    <header>
+        <h1>techelp</h1>
+    <nav>
+        <ul>
+            <li><a href="/create">+</a></li>
+            <li><a href="/">Tickets</a></li>
+            <li><a href="/setting">Settings</a></li>
+            <li><a href="/signout">Sign Out</a></li>
+        </ul>
+    </nav>
+    
+</header>
+<div>
+    <p>Hi <span></span></p>
+    <p><span></span> Ticket(s)</p>
+</div>
+<main>
+    <div class="ticket-form">
+        <form action="/tickets" method="post">
+            <input type="text" name="title" id="title" placeholder="Title" required><br>
+            <textarea name="description" id="description" cols="30" rows="10" placeholder="Description" ></textarea><br>
+            <select name="priority" id="priority" required>
+                <option value="" disabled selected>Select priority</option>
+                <option value="high">High</option>
+                <option value="medium">Medium</option>
+                <option value="low">Low</option>
+            </select><br>
+            <select name="category" id="category" required>
+                <option value="" disabled selected>Select category</option>
+                <option value="software">Software</option>
+                <option value="hardware">Hardware</option>
+                <option value="network">Network</option>
+            </select><br>
+            <input type="file" name="Screenshot" id="Screenshot"><br>
+            <input type="submit" value="submit">
+        </form>
+    </div>
+</main>
+</body>
+</html>

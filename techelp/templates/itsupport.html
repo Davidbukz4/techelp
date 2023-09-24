@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Page</title>
+    <title>Admin Panel</title>
     <!-- <link rel="stylesheet" href="{% static 'css/base.css' %}"> -->
-    <link rel="stylesheet" href="../static/css/base.css">
+    <link rel="stylesheet" href="../static/css/itsupport.css">
     <script src="{% static 'js/scripts.js' %}"></script>
 </head>
 <body>
@@ -28,7 +28,23 @@
     <main>
         <!-- {% block content %}
         {% endblock %} -->
+        <div class="tickets">
+            <ul id="ticket-list">
+                <li>
+                    <h3>Title: </h3>
+                    <p>Description:</p>
+                    <p>Priority: </p>
+                    <p>Status: </p>
+                    <p>Category: </p>
+                    <p>Owner: </p>
+                    <p>Created date: </p>
+                    <p>Resolved date: </p>
+                    <input type="checkbox">
+                    <button>View Attachment</button>
+                    <button>Save Changes</button>
+                </li>
+            </ul>
+        </div>
     </main>
-    
 </body>
 </html>

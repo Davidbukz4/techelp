@@ -7,7 +7,7 @@ body {
     align-items: center;
     background-color: rgb(160, 75, 197);
     padding: 10px;
-    /* position: relative; */
+    /* position: fixed; */
     top: 0;
     width: 100%;
     z-index: 1;
@@ -46,7 +46,7 @@ body {
     padding: 10px;
     /* background-color: #fff; */
     width: auto;
-    /* position: relative; */
+    /* position: fixed; */
     /* z-index: 1; */
     /* display: flex; */
   }
@@ -56,36 +56,43 @@ body {
   }
   
   main {
+    /* margin-top: 70px; */
     background-color: #fff;
     padding: 10px;
     height: auto;
-    width: fit-content;
+    /* width: 50%; */
     margin-top: 10px;
-    /* overflow-x: auto; */
   }
   
-  table {
-    border-collapse: collapse;
+  .ticket-form {
+    margin: auto;
+    width: 20%;
+  }
+
+  form {
+    /* width: 500px; */
+    margin: auto;
+  }
+
+  input, textarea, select {
     width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
   }
 
-  table th, table td {
-    border-bottom: 1px solid #ccc;
-    padding: 8px;
-    text-align: left;
+  input[type="submit"] {
+    background-color: rgb(56, 146, 56);
+    color: #fff;
+    border: none;
+    cursor: pointer;
   }
 
-  table th {
-    background-color: #f2f2f2;
-    font-weight: bold;
-    position: sticky;
-    top: 0;
+  input[type="submit"]:hover {
+    background-color: green;
   }
 
-  .nowrap {
-    white-space: nowrap;
-  }
-
-  .centered-text {
-    text-align: center;
+  main {
+    background-color: #f0f0f0;
   }
