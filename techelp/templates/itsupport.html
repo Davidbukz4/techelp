@@ -6,7 +6,7 @@
     <title>Admin Panel</title>
     <!-- <link rel="stylesheet" href="{% static 'css/base.css' %}"> -->
     <link rel="stylesheet" href="../static/css/itsupport.css">
-    <script src="{% static 'js/scripts.js' %}"></script>
+    <script src="{% static 'js/itsupport.js' %}"></script>
 </head>
 <body>
     <header>
@@ -28,7 +28,7 @@
         <!-- {% block content %}
         {% endblock %} -->
         <div class="search-bar">
-            <select name="filter">
+            <select name="filter" id="filter">
                 <option value="filter" selected disabled>filter</option>
                 <option value="none">None</option>
                 <option value="priority">Priority</option>
@@ -44,7 +44,7 @@
                     <h3>Title: </h3>
                     <p>Description:</p>
                     <p>Priority: </p>
-                    <p>Status: 
+                    <p class="status">Status: 
                         <select name="status">
                             <option value="" disabled selected>Select Status</option>
                             <option value="open">Open</option>
