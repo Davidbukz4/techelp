@@ -38,12 +38,16 @@ body {
   }
   
   button[type="submit"] {
-    background-color: #4caf50;
+    background-color: #3ba63f;
     color: white;
     width: 50%;
     border: none;
     border-radius: 5px;
     padding: 10px 5px;
+  }
+
+  button[type="submit"]:hover {
+    background-color: #27af2c;
   }
   
   p {
