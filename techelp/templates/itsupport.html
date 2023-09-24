@@ -13,7 +13,6 @@
             <h1>techelp</h1>
         <nav>
             <ul>
-                <li><a href="/create">+</a></li>
                 <li><a href="/">Tickets</a></li>
                 <li><a href="/setting">Settings</a></li>
                 <li><a href="/signout">Sign Out</a></li>
@@ -21,13 +20,24 @@
         </nav>
         
     </header>
-    <div>
+    <div class="welcome">
         <p>Hi <span></span></p>
         <p><span></span> Ticket(s)</p>
     </div>
     <main>
         <!-- {% block content %}
         {% endblock %} -->
+        <div class="search-bar">
+            <select name="filter">
+                <option value="filter" selected disabled>filter</option>
+                <option value="none">None</option>
+                <option value="priority">Priority</option>
+                <option value="status">Status</option>
+                <option value="category">Category</option>
+            </select>
+            <input type="search">
+            <button class="searchBtn">Search</button>
+        </div>
         <div class="tickets">
             <ul id="ticket-list">
                 <li>
@@ -47,8 +57,9 @@
                     <p>Created date: </p>
                     <p>Resolved date: </p>
                     <input type="checkbox">
-                    <button>View Attachment</button>
-                    <button type="submit">Save Changes</button>
+                    <button class="viewBtn">View Attachment</button>
+                    <button class="saveBtn">Save Changes</button>
+                    <button class="deleteBtn">Delete</button>
                 </li>
                 <li>
                     <h3>Title: </h3>
@@ -67,8 +78,9 @@
                     <p>Created date: </p>
                     <p>Resolved date: </p>
                     <input type="checkbox">
-                    <button>View Attachment</button>
-                    <button type="submit">Save Changes</button>
+                    <button class="viewBtn">View Attachment</button>
+                    <button class="saveBtn">Save Changes</button>
+                    <button class="deleteBtn">Delete</button>
                 </li>
             </ul>
         </div>

@@ -40,7 +40,7 @@ body {
     color: rgb(177, 23, 23);
   }
   
-  div {
+  .welcome {
     margin-top: 10px;
     top: 10px;
     padding: 10px;
@@ -51,7 +51,7 @@ body {
     /* display: flex; */
   }
   
-  div span {
+  .welcome span {
     font-weight: bold;
   }
   
@@ -82,16 +82,28 @@ body {
     margin-top: 8px;
   }
 
-  button[type="submit"] {
+  .saveBtn {
     background-color: rgb(65, 162, 65);
   }
 
-  button[type="submit"]:hover {
+  .saveBtn:hover {
     background-color: rgb(21, 122, 21);
   }
 
-  button.view:hover {
-    background-color: darkblue;
+  .viewBtn {
+    background-color: rgb(73, 105, 179);
+  }
+
+  .viewBtn:hover {
+    background-color: rgb(43, 81, 171);
+  }
+
+  .deleteBtn {
+    background-color: rgb(178, 54, 54);
+  }
+
+  .deleteBtn:hover {
+    background-color: rgb(171, 22, 22);
   }
 
   input[type="checkbox"] {
@@ -115,4 +127,17 @@ body {
     margin-left: auto;
     justify-content: center;
     margin-bottom: 10px;
+  }
+
+  .search-bar {
+    margin: 0 auto;
+    width: 40%;
+    text-align: center;
+  }
+
+  .searchBtn {
+    padding-top: 4px;
+    padding-bottom: 4px;
+    background-color: blue;
+    color: white;
   }
