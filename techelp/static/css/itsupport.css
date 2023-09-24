@@ -57,7 +57,7 @@ body {
   
   main {
     /* margin-top: 70px; */
-    background-color: #fff;
+    background-color: #f0f0f0;
     padding: 10px;
     height: auto;
     margin-top: 10px;
@@ -67,4 +67,52 @@ body {
     margin-left: auto;
     margin-right: auto;
     width: 40%;
+    /* background-color: #fff; */
+  }
+
+  button {
+    border: none;
+    border-radius: 4px;
+    padding: 10px;
+    padding-left: 20px;
+    padding-right: 20px;
+    cursor: pointer;
+    transition: #fff 0.3s;
+    margin-right: 10px;
+    margin-top: 8px;
+  }
+
+  button[type="submit"] {
+    background-color: rgb(65, 162, 65);
+  }
+
+  button[type="submit"]:hover {
+    background-color: rgb(21, 122, 21);
+  }
+
+  button.view:hover {
+    background-color: darkblue;
+  }
+
+  input[type="checkbox"] {
+    height: 45px;
+    width: 35px;
+    margin-right: 10px;
+    float: left;
+    /* margin-bottom: 10px; */
+  }
+
+  #ticket-list li {
+    background-color: rgba(202, 198, 203, 0.692);
+    border: none;
+    list-style: none;
+    box-shadow: 2px 2px 5px rgba(83, 76, 84, 0.692);
+    border-radius: 5px;
+    padding: 7px;
+    margin-bottom: 10px;
+    width: 100%;
+    margin-right: auto;
+    margin-left: auto;
+    justify-content: center;
+    margin-bottom: 10px;
   }
