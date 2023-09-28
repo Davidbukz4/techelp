@@ -1,3 +1,6 @@
 from django.contrib import admin
+from .models import Enduser, ITSupport, Ticket
 
-# Register your models here.
+admin.site.register(Enduser)
+admin.site.register(ITSupport)
+admin.site.register(Ticket)
