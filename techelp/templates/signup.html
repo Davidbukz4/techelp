@@ -2,20 +2,23 @@
 <html>
   <head>
     <title>Sign Up</title>
-    <!-- <link rel="stylesheet" href="{% static 'css/home.css' %}"> -->
-    <link rel="stylesheet" href="../static/css/signup.css">
+    <link rel="stylesheet" href="{% static 'css/signup.css' %}">
   </head>
   <body>
     <!-- <p>Flashed messages</p> -->
     <div class="container">
       <form id="signupForm" method="POST" action="/signup">
+        {% csrf_token %}
         <h2>Registration</h2>
-        {{ form.hidden_tag() }}
-        {{ form.username(class="form-control", id="username", placeholder="Username") }}<br>
-        {{ form.password(class="form-control", id="password", placeholder="Password") }}<br>
-        {{ form.email(class="form-control", id="email", placeholder="Email") }}<br>
-        {{ form.submit() }}
-        <a href="/login">Login</a>
+        <input type="text" name="username" placeholder="Username">
+        <input type="password" name="password1" placeholder="Password">
+        <input type="password" name="password2" placeholder="Confirm password">
+
+        <input type="radio" name="role" value="enduser"> Enduser
+        <input type="radio" name="role" value="it_support"> IT Support
+
+        <button type="submit" class="enduser-submit">Signup as Enduser</button>
+        <button type="submit" class="it-support-submit">Signup as IT Support</button>
       </form>
     </div>
   </body>

@@ -20,12 +20,12 @@ class ITSupport(models.Model):
 class Ticket(models.Model):
     title = models.CharField(max_length=255)
     description = models.TextField()
-    priority = models.ChoiceField(
-            choices=[("low", "Low"), ("medium", "Medium"), ("high", "High")],)
-    status = models.ChoiceField(
-            choices=[("open", "Open"), ("in_progress", "In Progress"), ("resolved", "Resolved")],)
-    category = models.ChoiceField(
-            choices=[("software", "Software"), ("hardware", "Hardware"), ("network", "Network")],)
+    priority_choices = (("low", "Low"), ("medium", "Medium"), ("high", "High"))
+    status_choices = (("open", "Open"), ("in_progress", "In Progress"), ("resolved", "Resolved"))
+    category_choices = (("software", "Software"), ("hardware", "Hardware"), ("network", "Network"))
+    priority = models.CharField(max_length=12, choices=priority_choices, default="low")
+    status = models.CharField(max_length=12, choices=status_choices, default="open")
+    category = models.CharField(max_length=12, choices=category_choices, default="software")
     owner = models.ForeignKey(Enduser, on_delete=models.PROTECT)
     created_at = models.DateTimeField(auto_now_add=True)
     resolved_at = models.DateTimeField(auto_now_add=True)

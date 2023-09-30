@@ -6,10 +6,11 @@
   </head>
   <body>
    <!-- <p>Flashed message</p> -->
-    <form id="loginForm" method="post" action="/login">
+    <form id="loginForm" method="POST" action="/login">
+      {% csrf_token %}
       <h2>Login</h2>
-      <input type="text" placeholder="Email">
-      <input type="text" placeholder="Password">
+      <input type="text" name="email" placeholder="Email">
+      <input type="password" name="password" placeholder="Password">
       <button type="submit">Submit</button>
       <p>Don't have an account? <a href="/signup">Sign up</a></p>
     </form>
