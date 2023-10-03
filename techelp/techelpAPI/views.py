@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponse
 from rest_framework.response import Response
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import UserCreationForm
 from rest_framework.authtoken.models import Token
 from rest_framework.decorators import api_view, renderer_classes, throttle_classes
@@ -13,9 +13,6 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.decorators import permission_classes
 #from rest_framework.throttling import AnonRateThrottle, UserRateThrottle
 
-@api_view()
-def home(request):
-    return render(request, "home.html")
 
 @api_view(["GET", "POST"])
 @permission_classes([IsAuthenticated])
@@ -79,17 +76,17 @@ def search(request):
         pass
 
 @api_view()
-@permission_classes([IsAuthenticated])
 def login(request):
-    if not(request.user.is_authenticated):
-        form = UserCreationForm()
+    if request.user.is_authenticated:
+        return Response(status=status.HTTP_401_UNAUTHORIZED)
 
     if request.method == "POST":
-        form = UserCreationForm()
+        form = UserCreationForm(data=request.data)
         if form.is_valid():
             form.save()
-            user = 
-        user = authenticate(username=username, password=password)
+            username = form.cleaned_data["email"]
+            password = form.cleaned_data["password"]
+            user = authenticate(email=email, password=password)
 
     if user is None:
         return Response(status=status.HTTP_401_UNAUTHORIZED)
@@ -100,10 +97,10 @@ def login(request):
     response = Response({"token": token.key}, status=status.HTTP_200_OK)
 
     if request.user.groups.filter(name="IT_Support").exists():
-        return redirect("/tickets_admin/")
+        return redirect("/tickets_admin")
     else:
-        user = Enduser.objects.get(email=form.cleaned_data["email"])
-        tickets = Ticket.objects.filter(owner=user)
+        authenticated__user = Enduser.objects.get(email=form.cleaned_data["email"])
+        tickets = Ticket.objects.filter(owner=authenticated__user)
         serializedItem = TicketSerializer(tickets, many=True)
         return render(request, "enduser.html", serializedItem.data)
 
@@ -115,6 +112,7 @@ def signout(request):
 
     token_object = Token.objects.get(key=token)
     token_object.delete()
+    logout(request)
     return redirect("/home")
 
 @api_view(["POST"])
@@ -122,14 +120,21 @@ def signup(request):
     if request.method == "POST":
         form = UserCreationForm(request.POST)
         if form.is_valid():
+            username = form.cleaned_data["username"]
+            password = form.cleaned_data["password1"]
+            email = form.cleaned_data["email"]
             user = form.save()
             if request.POST.get("role") == "enduser":
-                enduser = Enduser.objects.create(user=user)
+                enduser = Enduser.objects.create(username, email, password)
+                logged_user = enduser
+                user = authenticate(email=email, password=password)
+                login(request, user)
+                return redirect("/?arg={logged_user}")
             else:
-                it_support = ITSupport.objects.create(user=user)
-            user = authenticate(username=form.cleaned_data["email"], password=form.cleaned_data["password1"])
-            login(request, user)
-            return redirect("/")
+                it_support = ITSupport.objects.create(username, email, password)
+                user = authenticate(email=email, password=password)
+                login(request, user)
+                return redirect("/tickets_admin")
     else:
         form = UserCreationForm()
         return render(request, "signup.html", {"form": form})

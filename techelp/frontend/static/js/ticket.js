@@ -5,7 +5,7 @@ $(document).ready(() => {
         let formData = new FormData($("#ticket-form"));
 
         $.ajax({
-            url: "enter url",
+            url: "127.0.0.1:8000/api/create-ticket",
             type: "POST",
             data: formData,
             success: function(response) {
@@ -15,6 +15,7 @@ $(document).ready(() => {
             },
             error: function(error) {
                 console.log(error);
+                console.log(formData)
             }
         })
     })
