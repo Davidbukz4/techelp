@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from rest_framework.response import Response
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import UserCreationForm
@@ -11,23 +11,25 @@ from rest_framework import status
 from django.core.paginator import Paginator, EmptyPage
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.decorators import permission_classes
+from django.utils import timezone
 #from rest_framework.throttling import AnonRateThrottle, UserRateThrottle
 
 
 @api_view(["GET", "POST"])
 @permission_classes([IsAuthenticated])
 def create(request):
-    user_id = request.user.id
-    tickets = Ticket.objects.filter(owner=request.user)
-    serializedItem = TicketSerializer(tickets)
-    if request.method == "GET":
-        return render(request, "ticket.html", serializedItem.data)
-    elif request.method == "POST":
-        serializedItem = TicketSerializer(data=request.data)
-        serializedItem.is_valid(raise_exception=True)
-        serializedItem.save()
-        #return Response(serializedItem.validated_data, status.HTTP_201_CREATED)
-        return redirect("/tickets")
+    if request.method:
+        data = request.data.copy()
+        data["owner"] = request.user.id
+        #tickets = Ticket.objects.filter(owner=request.user)
+        serializedItem = TicketSerializer(data=data)
+        if serializedItem.is_valid():
+            serializedItem.save()
+            return JsonResponse({"message": "Ticket created successfully"}, status=status.HTTP_201_CREATED)
+        else:
+            return JsonResponse({"error": serializedItem.errors}, status=status.HTTP_400_BAD_REQUEST)
+    else:
+        return JsonResponse({"error": "Only POST requests are allowed"}, status.HTTP_405_METHOD_NOT_ALLOWED)
 
 @api_view()
 @permission_classes([IsAuthenticated])
@@ -78,31 +80,32 @@ def search(request):
 @api_view()
 def login(request):
     if request.user.is_authenticated:
-        return Response(status=status.HTTP_401_UNAUTHORIZED)
+        return JsonResponse({"message": "User is already authenticated"}, status=status.HTTP_200_OK)
 
     if request.method == "POST":
-        form = UserCreationForm(data=request.data)
-        if form.is_valid():
-            form.save()
-            username = form.cleaned_data["email"]
-            password = form.cleaned_data["password"]
+        email = request.data.get("email")
+        password = request.data.get("password")
+        
+        enduser = get_object_or_404(Enduser, email=email)
+        itsupport = get_object_or_404(ITSupport, email=email)
+
+        if enduser.check_password(password):
             user = authenticate(email=email, password=password)
 
-    if user is None:
-        return Response(status=status.HTTP_401_UNAUTHORIZED)
+            if user is None:
+                login(request, user)
+                token, created = Token.objects.get_object_or_404(user=user)
+                return JsonResponse({"message": "User logged in successfully", "user_id": user.id, "token": token.key}, status=status.HTTP_200_OK)
+                #return redirect("/tickets")
+        elif itsupport.check_password(password):
+            user = authenticate(email=email, password=password)
 
-    login(request, user)
-
-    token = Token.objects.get_or_create(user=user)
-    response = Response({"token": token.key}, status=status.HTTP_200_OK)
-
-    if request.user.groups.filter(name="IT_Support").exists():
-        return redirect("/tickets_admin")
-    else:
-        authenticated__user = Enduser.objects.get(email=form.cleaned_data["email"])
-        tickets = Ticket.objects.filter(owner=authenticated__user)
-        serializedItem = TicketSerializer(tickets, many=True)
-        return render(request, "enduser.html", serializedItem.data)
+            if user is None:
+                login(request, user)
+                token, created = Token.objects.get_object_or_404(user=user)
+                return JsonResponse({"message": "User logged in successfully", "user_id": user.id, "token": token.key, "role": "admin"}, status=status.HTTP_200_OK)
+                #return redirect("/tickets_admin")
+        return JsonResponse({"error": "Invalid credentials"}, status=status.HTTP_401_UNAUTHORIZED)
 
 @api_view()
 def signout(request):
@@ -129,7 +132,7 @@ def signup(request):
                 logged_user = enduser
                 user = authenticate(email=email, password=password)
                 login(request, user)
-                return redirect("/?arg={logged_user}")
+                return redirect("/tickets/?arg={logged_user}")
             else:
                 it_support = ITSupport.objects.create(username, email, password)
                 user = authenticate(email=email, password=password)

@@ -28,7 +28,7 @@ class Ticket(models.Model):
     category = models.CharField(max_length=12, choices=category_choices, default="software")
     owner = models.ForeignKey(Enduser, on_delete=models.PROTECT)
     created_at = models.DateTimeField(auto_now_add=True)
-    resolved_at = models.DateTimeField(auto_now_add=True)
+    resolved_at = models.DateTimeField(null=True, blank=True)
     screenshot = models.ImageField(upload_to="attachments/", blank=True, null=True)
 
     def __str__(self):

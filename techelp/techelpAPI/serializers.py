@@ -71,6 +71,6 @@ class TicketSerializer(serializers.ModelSerializer):
     owner = EnduserSerializer(read_only=True)
 
     class Meta:
-        model = ITSupport
+        model = Ticket
         fields = ['id', 'title', 'description', 'priority', 'status',
                   'category', 'owner', 'created_at', 'resolved_at', 'screenshot']
