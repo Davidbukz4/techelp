@@ -17,7 +17,7 @@ $(document).ready(() => {
             dataType: "json",
             success: function (response) {
                 if (response.token) {
-                    console.log("Login successful");
+                    console.log("Login successful", response);
                 } else {
                     console.log("Login failed");
                 }

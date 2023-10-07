@@ -142,3 +142,4 @@ REST_FRAMEWORK = {
 #TEMPLATE_DIRS = (
 #        os.path.join(SETTINGS_PATH, 'templates'),
 #)
+APPEND_SLASH=False

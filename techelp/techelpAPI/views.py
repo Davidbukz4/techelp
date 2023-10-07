@@ -98,8 +98,8 @@ def login(request):
             if user is None:
                 login(request, user)
                 token, created = Token.objects.get_object_or_404(user=user)
-                #return JsonResponse({"message": "User logged in successfully", "user_id": user.id, "token": token.key}, status=status.HTTP_200_OK)
-                return redirect("/tickets/?arg={user.id}")
+                return JsonResponse({"message": "User logged in successfully", "user_id": user.id, "token": token.key}, status=status.HTTP_200_OK)
+                #return redirect("/tickets/?arg={user.id}")
         elif itsupport.check_password(password):
             user = authenticate(email=email, password=password)
 
@@ -124,23 +124,18 @@ def signout(request):
 @api_view(["POST"])
 def signup(request):
     if request.method == "POST":
-        form = UserCreationForm(request.POST)
-        if form.is_valid():
-            username = form.cleaned_data["username"]
-            password = form.cleaned_data["password1"]
-            email = form.cleaned_data["email"]
-            user = form.save()
-            if request.POST.get("role") == "enduser":
-                enduser = Enduser.objects.create(username, email, password)
-                logged_user = enduser
-                user = authenticate(email=email, password=password)
-                login(request, user)
-                return redirect("/tickets/?arg={}".format(logged_user.id))
-            else:
-                it_support = ITSupport.objects.create(username, email, password)
-                user = authenticate(email=email, password=password)
-                login(request, user)
-                return redirect("/tickets_admin")
-    else:
-        form = UserCreationForm()
-        return render(request, "signup.html", {"form": form})
+        username = request.data["username"]
+        password = request.data["password"]
+        email = request.data["email"]
+        if request.data["role"] == "enduser":
+            enduser = Enduser.objects.create(username, email, password)
+            logged_user = enduser
+            user = authenticate(email=email, password=password)
+            login(request, user)
+            return JsonResponse(enduser, status=200)
+            #return redirect("/tickets/?arg={}".format(logged_user.id))
+        else:
+            it_support = ITSupport.objects.create(username, email, password)
+            user = authenticate(email=email, password=password)
+            login(request, user)
+            return redirect("/tickets_admin")

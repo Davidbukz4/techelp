@@ -9,19 +9,19 @@
   <body>
     <!-- <p>Flashed messages</p> -->
     <div class="container">
-      <form id="signupForm" method="POST" action="/signup">
+      <form id="signupForm" method="POST" >
         {% csrf_token %}
         <h2>Registration</h2>
-        <input type="text" name="username" placeholder="Username">
-        <input type="text" name="email" placeholder="Email">
-        <input type="password" name="password1" placeholder="Password">
-        <input type="password" name="password2" placeholder="Confirm password">
+        <input type="text" name="username" id="username" placeholder="Username">
+        <input type="text" name="email" id="email" placeholder="Email">
+        <input type="password" name="password1" id="password" placeholder="Password">
+        <!-- <input type="password" name="password2" placeholder="Confirm password"> -->
 
-        <input type="radio" name="role" value="enduser"> Enduser
-        <input type="radio" name="role" value="it_support"> IT Support
+        <input type="radio" name="role" id="enduser-role" value="enduser"> Enduser
+        <input type="radio" name="role" id="itsupport-role" value="it_support"> IT Support
 
-        <button type="submit" class="enduser-submit">Enduser</button>
-        <button type="submit" class="it-support-submit">IT Support</button>
+        <!-- <button type="submit" class="enduser-submit">Enduser</button> -->
+        <button type="submit" class="submit">Submit</button>
       </form>
     </div>
   </body>
