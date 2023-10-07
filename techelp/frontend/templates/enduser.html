@@ -13,17 +13,17 @@
             <h1>Techelp</h1>
         <nav>
             <ul>
-                <li><a href="/create">+</a></li>
-                <li><a href="/tickets">Tickets</a></li>
-                <li><a href="/settings">Settings</a></li>
-                <li><a href="/signout">Sign Out</a></li>
+                <li id="create"><a href="/create">+</a></li>
+                <li id="tickets"><a href="/tickets">Tickets</a></li>
+                <li id="settings"><a href="/settings">Settings</a></li>
+                <li id="signout"><a href="/signout">Sign Out</a></li>
             </ul>
         </nav>
         
     </header>
     <div>
-        <p>Hi <span></span></p>
-        <p>You have submitted <span></span> Ticket(s)</p>
+        <p>Hi <span id="user-id" data-user-id="{% user_id %}"></span></p>
+        <p>You have submitted <span id="ticket-count"></span> Ticket(s)</p>
     </div>
     
     <main>
@@ -44,7 +44,7 @@
                         <th>Resolved Date</th>
                     </tr>
                 </thead>
-            <tbody>
+            <tbody id="ticket-list">
                 <tr>
                     <td class="nowrap">ticket one title</td>
                     <td>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Magnam, alias repudiandae sit sint recusandae maxime quas dolores iure repellendus assumenda. Dignissimos maxime vero quae, dolorem ad similique amet voluptatum commodi!</td>

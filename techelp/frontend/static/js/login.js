@@ -11,7 +11,7 @@ $(document).ready(() => {
         };
 
         $.ajax({
-            url: "127.0.0.1:8000/api/login",
+            url: "http://127.0.0.1:8000/api/login",
             type: "POST",
             data: loginData,
             dataType: "json",
