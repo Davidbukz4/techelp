@@ -38,12 +38,37 @@ $(document).ready(() => {
 
     $("#create").click(function (e) {
         e.preventDefault();
-        //
+        
+        $.ajax({
+            url: "http://127.0.0.1:8000/api/create",
+            type: "GET",
+            data: data,
+            dataType: "json",
+            success: function (response) {
+                console.log(response)
+            },
+            error: function(error) {
+                console.log("Error: " + error.statusText);
+            }
+        })
     })
 
     $("#signout").click(function (e) {
         e.preventDefault();
-        //
+        
+        $.ajax({
+            url: "http://127.0.0.1:8000/api/signout",
+            type: "POST",
+            data: data,
+            dataType: "json",
+            success: function (response) {
+                console.log(response)
+                window.location.href = "/login"
+            },
+            error: function(error) {
+                console.log("Error: " + error.statusText);
+            }
+        })
     })
 
 })
